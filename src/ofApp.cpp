@@ -5,14 +5,13 @@ void ofApp::setup(){
   position_ = ofVec2f(100.0, ofGetHeight() * 0.5);
   velocity_ = ofVec2f(1, 0.0) * PX_PER_METER;
   
-  last_elapsed_time_ = ofGetElapsedTimeMillis();
+  app_time_.setup();
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-  uint64_t elapsed_time_ = ofGetElapsedTimeMillis();
-  position_ += velocity_ * (elapsed_time_ - last_elapsed_time_) * 0.001;
-  last_elapsed_time_ = elapsed_time_;
+  position_ += velocity_ * app_time_.getDeltaTimeS();
+  app_time_.update();
 }
 
 //--------------------------------------------------------------

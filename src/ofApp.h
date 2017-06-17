@@ -1,8 +1,8 @@
 #pragma once
 
-#define PX_PER_METER 100
-
 #include "ofMain.h"
+#include "./app_time.h"
+#define PX_PER_METER 100
 
 class ofApp : public ofBaseApp{
 
@@ -26,5 +26,5 @@ class ofApp : public ofBaseApp{
   ofVec2f position_;
   ofVec2f velocity_;  // meter per second
   
-  uint64_t last_elapsed_time_;
+  AppTime app_time_;
 };
