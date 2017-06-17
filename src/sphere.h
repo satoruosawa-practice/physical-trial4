@@ -18,6 +18,7 @@ class Sphere {
   explicit Sphere(const AppTime &app_time);
   void setup();
   void update();
+  void draw();
   // getter
   ofVec2f getPosition() const { return position_; }
   ofVec2f getVelocity() const { return velocity_; }
@@ -32,8 +33,12 @@ class Sphere {
   void addAcceleration(const ofVec2f &a) { acceleration_ += a; }
 
  private:
+  void bounceOfWalls_();
+  const AppTime * app_time_;
+
   ofVec2f position_;
   ofVec2f velocity_;  // m/s
   ofVec2f acceleration_;  // m/s2
-  const AppTime * app_time_;
+  float radius_;
+  float cor_;  // coefficient of restitution
 };

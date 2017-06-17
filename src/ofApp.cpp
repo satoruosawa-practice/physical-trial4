@@ -1,7 +1,7 @@
 #include "ofApp.h"
 
 //--------------------------------------------------------------
-void ofApp::setup(){
+void ofApp::setup() {
     ofSetFrameRate(60);
 //  ofSetVerticalSync(false);
 //  ofSetFrameRate(0);
@@ -19,9 +19,9 @@ void ofApp::update() {
 }
 
 //--------------------------------------------------------------
-void ofApp::draw(){
+void ofApp::draw() {
   ofDrawGrid(100, 11, false, false, false, true);
-  ofDrawCircle(sphere_.getPosition(), 10);
+  sphere_.draw();
 
   ofDrawBitmapString("frameRate = " + ofToString(ofGetFrameRate()), 10, 20);
   ofDrawBitmapString("acceleration = " + ofToString(sphere_.getAcceleration()), 10, 40);
@@ -30,7 +30,7 @@ void ofApp::draw(){
 }
 
 //--------------------------------------------------------------
-void ofApp::keyPressed(int key){
+void ofApp::keyPressed(int key) {
   switch(key) {
     case OF_KEY_LEFT:
       sphere_.addAcceleration(ofVec2f(-1.0, 0.0) * PX_PER_METER);
