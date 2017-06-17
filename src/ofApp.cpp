@@ -4,12 +4,14 @@
 void ofApp::setup(){
   position_ = ofVec2f(100.0, ofGetHeight() * 0.5);
   velocity_ = ofVec2f(1, 0.0) * PX_PER_METER;
-  
+  acceleration_ = ofVec2f(1, 0.0) * PX_PER_METER;
+
   app_time_.setup();
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
+  velocity_ += acceleration_ * app_time_.getDeltaTimeS();
   position_ += velocity_ * app_time_.getDeltaTimeS();
   app_time_.update();
 }
@@ -22,7 +24,6 @@ void ofApp::draw(){
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-
 }
 
 //--------------------------------------------------------------

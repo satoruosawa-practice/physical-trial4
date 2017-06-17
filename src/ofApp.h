@@ -2,7 +2,7 @@
 
 #include "ofMain.h"
 #include "./app_time.h"
-#define PX_PER_METER 100
+#define PX_PER_METER 10
 
 class ofApp : public ofBaseApp{
 
@@ -24,7 +24,8 @@ class ofApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
 		
   ofVec2f position_;
-  ofVec2f velocity_;  // meter per second
+  ofVec2f velocity_;  // m/s
+  ofVec2f acceleration_;  // m/s2
   
   AppTime app_time_;
 };
