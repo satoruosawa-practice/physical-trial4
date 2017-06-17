@@ -6,8 +6,8 @@ void ofApp::setup(){
 //  ofSetVerticalSync(false);
 //  ofSetFrameRate(0);
   ofBackground(63);
-  
-  sphere_ = Sphere(&app_time_);
+
+  sphere_ = Sphere(app_time_);
   sphere_.setup();
   app_time_.setup();
 }

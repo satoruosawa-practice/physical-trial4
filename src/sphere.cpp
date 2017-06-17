@@ -7,8 +7,9 @@
 //
 
 #include "./sphere.h"
-Sphere::Sphere(AppTime * app_time)
-: app_time_(app_time) {}
+Sphere::Sphere(const AppTime &app_time) {
+  app_time_ = &app_time;
+}
 
 void Sphere::setup() {
   acceleration_ = ofVec2f(0.0, 0.0) * PX_PER_METER;

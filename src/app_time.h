@@ -11,10 +11,13 @@
 
 class AppTime {
  public:
+  AppTime() = default;
   void setup();
   void update();
-  const uint64_t getDeltaTimeMS() { return elapsed_time_ - last_elapsed_time_; }
-  const float getDeltaTimeS() {
+  uint64_t getDeltaTimeMS() const {
+    return elapsed_time_ - last_elapsed_time_;
+  }
+  float getDeltaTimeS() const {
     return static_cast<float>(elapsed_time_ - last_elapsed_time_) * 0.001;
   }
 

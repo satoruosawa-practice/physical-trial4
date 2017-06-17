@@ -15,13 +15,13 @@
 class Sphere {
  public:
   Sphere() = default;
-  Sphere(AppTime * app_time);
+  explicit Sphere(const AppTime &app_time);
   void setup();
   void update();
   // getter
-  const ofVec2f getPosition() { return position_; }
-  const ofVec2f getVelocity() { return velocity_; }
-  const ofVec2f getAcceleration() { return acceleration_; }
+  ofVec2f getPosition() const { return position_; }
+  ofVec2f getVelocity() const { return velocity_; }
+  ofVec2f getAcceleration() const { return acceleration_; }
   // setter
   void setPosition(const ofVec2f &p) { position_ = p; }
   void setVelocity(const ofVec2f &v) { velocity_ = v; }
@@ -35,5 +35,5 @@ class Sphere {
   ofVec2f position_;
   ofVec2f velocity_;  // m/s
   ofVec2f acceleration_;  // m/s2
-  AppTime * app_time_;
+  const AppTime * app_time_;
 };
