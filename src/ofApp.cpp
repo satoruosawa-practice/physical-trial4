@@ -14,6 +14,15 @@ void ofApp::setup() {
 
 //--------------------------------------------------------------
 void ofApp::update() {
+  sphere_.resetForce();
+
+  if (push_duration_ > app_time_.getDeltaTimeMS()) {
+    sphere_.addForce(push_force_);
+    push_duration_ -= app_time_.getDeltaTimeMS();
+  } else {
+    push_force_ = ofVec2f(0.0, 0.0);
+    push_duration_ = 0;
+  }
   sphere_.update();
   app_time_.update();
 }
@@ -24,25 +33,27 @@ void ofApp::draw() {
   sphere_.draw();
 
   ofDrawBitmapString("frameRate = " + ofToString(ofGetFrameRate()), 10, 20);
-  ofDrawBitmapString("acceleration = " + ofToString(sphere_.getAcceleration()), 10, 40);
-  ofDrawBitmapString("speed = " + ofToString(sphere_.getVelocity()), 10, 60);
-  ofDrawBitmapString("position = " + ofToString(sphere_.getPosition()), 10, 80);
+  sphere_.drawParameters();
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key) {
   switch(key) {
     case OF_KEY_LEFT:
-      sphere_.addAcceleration(ofVec2f(-1.0, 0.0) * PX_PER_METER);
+      push_force_ += ofVec2f(-1.0, 0.0);
+      push_duration_ += 1000;
       break;
     case OF_KEY_RIGHT:
-      sphere_.addAcceleration(ofVec2f(1.0, 0.0) * PX_PER_METER);
+      push_force_ += ofVec2f(1.0, 0.0);
+      push_duration_ += 1000;
       break;
     case OF_KEY_UP:
-      sphere_.addAcceleration(ofVec2f(0.0, -1.0) * PX_PER_METER);
+      push_force_ += ofVec2f(0.0, -1.0);
+      push_duration_ += 1000;
       break;
     case OF_KEY_DOWN:
-      sphere_.addAcceleration(ofVec2f(0.0, 1.0) * PX_PER_METER);
+      push_force_ += ofVec2f(0.0, 1.0);
+      push_duration_ += 1000;
       break;
     case 'c':
       sphere_.setup();

@@ -11,3 +11,4 @@
 #define PX_PER_METER 100
 //#define PX_PER_METER 220 * 39.3701  // mac book pro 15inch
 
+#define GRAVITY 9.8
