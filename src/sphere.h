@@ -16,7 +16,7 @@ class Sphere {
  public:
   Sphere() = default;
   explicit Sphere(const AppTime &app_time);
-  void setup();
+  void reset();
   void update();
   void draw();
   void drawParameters();
@@ -25,16 +25,17 @@ class Sphere {
   void addForce(const ofVec2f &f) {force_ += f; }
 
  private:
-  void updateForce_();
-  void updatePos_();
-  void bounceOfWalls_();
+  void updateForce();
+  void updatePos();
+  void bounceOfWalls(const float &radius,
+                     ofVec2f * position, ofVec2f * velocity);
   const AppTime * app_time_;
 
   ofVec2f position_;
   ofVec2f velocity_;  // m/s
   ofVec2f acceleration_;  // m/s2
   ofVec2f force_;  // N
-  float radius_;
+  float radius_;  // m
   float mass_;  // kg
   float cor_;  // coefficient of restitution
 };

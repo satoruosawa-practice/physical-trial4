@@ -14,6 +14,10 @@ class AppTime {
   AppTime() = default;
   void setup();
   void update();
+  // getter
+  float getElapsedTimeS() const {
+    return static_cast<float>(elapsed_time_) * 0.001;
+  }
   uint64_t getDeltaTimeMS() const {
     return elapsed_time_ - last_elapsed_time_;
   }

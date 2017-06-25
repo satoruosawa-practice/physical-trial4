@@ -7,9 +7,8 @@ void ofApp::setup() {
 //  ofSetFrameRate(0);
   ofBackground(63);
 
-  sphere_ = Sphere(app_time_);
-  sphere_.setup();
   app_time_.setup();
+  sphere_ = Sphere(app_time_);
 }
 
 //--------------------------------------------------------------
@@ -17,10 +16,13 @@ void ofApp::update() {
   app_time_.update();
   sphere_.resetForce();
 
-  if (push_duration_ > 0) {
+  if (push_duration_ > app_time_.getDeltaTimeMS()) {
     sphere_.addForce(push_force_);
     push_duration_ -= app_time_.getDeltaTimeMS();
-  } else {
+  } else if (push_duration_ != 0) {
+    float remaining = static_cast<float>(push_duration_) /
+        static_cast<float>(app_time_.getDeltaTimeMS());
+    sphere_.addForce(push_force_ * remaining);
     push_force_ = ofVec2f(0.0, 0.0);
     push_duration_ = 0;
   }
@@ -29,10 +31,17 @@ void ofApp::update() {
 
 //--------------------------------------------------------------
 void ofApp::draw() {
-  ofDrawGrid(100, 11, false, false, false, true);
+  ofDrawGrid(PX_PER_METER, 11, false, false, false, true);
   sphere_.draw();
 
-  ofDrawBitmapString("frameRate = " + ofToString(ofGetFrameRate()), 10, 20);
+  ofDrawBitmapString("frameRate: " +
+                     ofToString(ofGetFrameRate(), 1) +
+                     " fps",
+                     10, 20);
+  ofDrawBitmapString("time: " +
+                     ofToString(app_time_.getElapsedTimeS(), 1) +
+                     " s",
+                     200, 20);
   sphere_.drawParameters();
 }
 
@@ -56,7 +65,7 @@ void ofApp::keyPressed(int key) {
       push_duration_ += 1000;
       break;
     case 'c':
-      sphere_.setup();
+      sphere_.reset();
       break;
     default:
       break;
