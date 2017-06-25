@@ -15,13 +15,10 @@ Sphere::Sphere(const AppTime &app_time) {
 }
 
 void Sphere::reset() {
-  acceleration_ = ofVec2f(0.0, 0.0);
-  force_ = ofVec2f(0.0, 0.0);
-  acceleration_ += ofVec2f(0.0, 0.0);
+  resetForce();
   velocity_ = ofVec2f(0.0, 0.0);
   position_ = ofVec2f(2.0, 2.0);
 }
-
 
 void Sphere::update(){
   updateForce();
@@ -30,6 +27,7 @@ void Sphere::update(){
 
 void Sphere::resetForce() {
   force_ = ofVec2f(0.0, 0.0);
+  acceleration_ = ofVec2f(0.0, 0.0);
 }
 
 void Sphere::updateForce() {
@@ -43,7 +41,8 @@ void Sphere::updatePos() {
 
   ofVec2f p = position_ * PX_PER_METER;
   ofVec2f v = velocity_ * PX_PER_METER;
-  bounceOfWalls(radius_, &p, &v);
+  float r = radius_ * PX_PER_METER;
+  bounceOfWalls(r, &p, &v);
   velocity_ = v / static_cast<float>(PX_PER_METER);
   position_ = p / static_cast<float>(PX_PER_METER);
 }
@@ -90,5 +89,3 @@ void Sphere::bounceOfWalls(const float &radius,
     position->y = ymax - (position->y - ymax);
   }
 }
-
-
