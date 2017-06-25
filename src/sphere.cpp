@@ -19,7 +19,7 @@ void Sphere::setup() {
   force_ = ofVec2f(0.0, 0.0);
   acceleration_ += ofVec2f(0.0, 0.0);
   velocity_ = ofVec2f(0.0, 0.0);
-  position_ = ofVec2f(ofGetWidth() * 0.5, radius_);
+  position_ = ofVec2f(ofGetWidth() * 0.5, ofGetHeight() * 0.5);
 }
 
 
@@ -62,7 +62,7 @@ void Sphere::drawParameters() {
 }
 
 void Sphere::bounceOfWalls_() {
-  cor_ = 0.9;
+  cor_ = 1.0;
   float xmin = radius_;
   float xmax = ofGetWidth() - radius_;
   float ymin = radius_;

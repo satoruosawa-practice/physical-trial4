@@ -14,9 +14,10 @@ void ofApp::setup() {
 
 //--------------------------------------------------------------
 void ofApp::update() {
+  app_time_.update();
   sphere_.resetForce();
 
-  if (push_duration_ > app_time_.getDeltaTimeMS()) {
+  if (push_duration_ > 0) {
     sphere_.addForce(push_force_);
     push_duration_ -= app_time_.getDeltaTimeMS();
   } else {
@@ -24,7 +25,6 @@ void ofApp::update() {
     push_duration_ = 0;
   }
   sphere_.update();
-  app_time_.update();
 }
 
 //--------------------------------------------------------------
